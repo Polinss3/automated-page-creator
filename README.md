@@ -1,1 +1,1 @@
-# automated-page-creator
+# automated-page-creation

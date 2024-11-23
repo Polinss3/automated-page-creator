@@ -1,0 +1,42 @@
+.postContent {
+  padding: 2rem;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.postContent h1 {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+}
+
+.postContent h2 {
+  font-size: 2rem;
+  margin-top: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+.postContent p {
+  font-size: 1.2rem;
+  line-height: 1.6;
+}
+
+.postContent ul, .postContent ol {
+  margin-left: 1.5rem;
+}
+
+.postContent table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 1rem;
+}
+
+.postContent th, .postContent td {
+  border: 1px solid #ddd;
+  padding: 0.5rem;
+}
+
+.postContent img {
+  max-width: 100%;
+  height: auto;
+  margin: 1rem 0;
+}

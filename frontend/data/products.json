@@ -1,0 +1,34 @@
+[
+    {
+        "name": "batidora express",
+        "slug": "batidora-express",
+        "price": "19.99",
+        "main_image": "https://example.com/images/prod_a_main.jpg",
+        "secondary_image": "https://example.com/images/prod_a_sec.jpg",
+        "subtitle": "La Batidora Express: Tu Aliada en la Cocina",
+        "description": "Descubre la Batidora Express, el electrodoméstico que transformará tu experiencia culinaria. Con su potente motor y diseño ergonómico, esta batidora es perfecta para mezclar, batir y emulsionar tus ingredientes favoritos en cuestión de segundos. Ideal para preparar desde deliciosos batidos hasta masas ligeras, su versatilidad y rendimiento la convierten en un imprescindible en cualquier cocina moderna.",
+        "features": [
+            "Potente motor de alta velocidad para resultados rápidos y eficientes.",
+            "Diseño ergonómico que facilita su manejo y uso prolongado.",
+            "Variedad de velocidades ajustables para diferentes tipos de mezclas.",
+            "Fácil de limpiar, con partes desmontables aptas para lavavajillas.",
+            "Compacta y ligera, ideal para cocinas con espacio limitado."
+        ]
+    },
+    {
+        "name": "kawasaki ninja",
+        "slug": "kawasaki-ninja",
+        "price": "21999.99",
+        "main_image": "https://example.com/images/prod_b_main.jpg",
+        "secondary_image": "https://example.com/images/prod_b_sec.jpg",
+        "subtitle": "Desata tu pasión por la velocidad con la Kawasaki Ninja",
+        "description": "La Kawasaki Ninja es más que una motocicleta; es una declaración de intenciones para los amantes de la velocidad y el diseño. Con un diseño aerodinámico y una tecnología de vanguardia, esta moto está diseñada para ofrecer un rendimiento excepcional en cada curva y recta. Su potente motor garantiza una aceleración impresionante, mientras que su chasis ligero proporciona una maniobrabilidad sin igual, lo que la convierte en la compañera perfecta para cualquier aventura en la carretera.",
+        "features": [
+            "Motor de alta potencia que ofrece aceleración rápida y eficiente.",
+            "Diseño aerodinámico que optimiza la estabilidad y el rendimiento.",
+            "Sistema de suspensión avanzada para una conducción suave y cómoda.",
+            "Frenos de alto rendimiento que garantizan seguridad y control.",
+            "Panel de instrumentos digital que proporciona información clara y útil en tiempo real."
+        ]
+    }
+]

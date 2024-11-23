@@ -8,6 +8,8 @@ import unicodedata
 import string
 import importlib
 import re
+import json
+import time
 
 from config import (
     API_KEY,
@@ -49,49 +51,85 @@ ELEMENT_CLASSES = {
     # Añade otros elementos si es necesario
 }
 
-# Crear el directorio de salida si no existe
-output_dir = os.path.join('outputs', 'products')
-os.makedirs(output_dir, exist_ok=True)
-
-# Leer los títulos existentes para evitar repeticiones
-existing_titles = []
-for filename in os.listdir(output_dir):
-    if filename.endswith('.html'):
-        with open(os.path.join(output_dir, filename), 'r', encoding='utf-8') as f:
-            content = f.read()
-            # Extraer el título existente
-            match = re.search(r'<title>(.*?)</title>', content)
-            if match:
-                existing_titles.append(match.group(1))
-
-# Definir el valor de la meta etiqueta robots
-robots_content = 'index, follow' if ALLOW_SEARCH_ENGINES else 'noindex, nofollow'
-
-# Función para generar un nombre de archivo a partir del nombre del producto
-def generate_filename_from_name(name, max_length=50):
+# Función para generar un slug a partir del nombre del producto
+def generate_slug(name: str, existing_slugs: set) -> str:
+    """
+    Genera un slug único a partir del nombre del producto.
+    Reemplaza espacios y caracteres no permitidos por guiones.
+    Asegura que el slug sea único agregando un sufijo si es necesario.
+    """
     # Normalizar el nombre para eliminar acentos y caracteres especiales
     name_normalized = unicodedata.normalize('NFKD', name)
     name_encoded = name_normalized.encode('ascii', 'ignore').decode('ascii')
     # Convertir a minúsculas
     name_lower = name_encoded.lower()
-    # Reemplazar espacios y caracteres no permitidos por guiones bajos
-    allowed_chars = string.ascii_lowercase + string.digits + '_-'
-    filename_clean = ''.join(c if c in allowed_chars else '_' for c in name_lower.replace(' ', '_'))
-    # Limitar la longitud del nombre de archivo
-    filename_base = filename_clean[:max_length]
-    # Asegurarse de que el nombre no esté vacío
-    if not filename_base:
-        filename_base = 'producto'
-    return filename_base
+    # Reemplazar espacios y caracteres no permitidos por guiones
+    slug = re.sub(r'[^a-z0-9]+', '-', name_lower).strip('-')
+    # Asegurarse de que el slug no esté vacío
+    slug = slug or 'producto'
+    
+    # Si el slug ya existe, agregar un sufijo incremental para hacerlo único
+    original_slug = slug
+    counter = 1
+    while slug in existing_slugs:
+        slug = f"{original_slug}-{counter}"
+        counter += 1
+    
+    return slug
+
+# Crear el directorio de datos si no existe
+data_dir = os.path.join('frontend', 'data')
+os.makedirs(data_dir, exist_ok=True)  # Crea 'frontend/data/' si no existe
+
+# Ruta del archivo JSON
+json_path = os.path.join(data_dir, 'products.json')
+
+# Leer los productos existentes para evitar duplicados y recopilar slugs
+existing_products = []
+existing_slugs = set()
+
+if os.path.exists(json_path):
+    with open(json_path, 'r', encoding='utf-8') as f:
+        try:
+            existing_products = json.load(f)
+            for product in existing_products:
+                # Verificar si el producto ya tiene un 'slug'
+                if 'slug' in product and product['slug']:
+                    existing_slugs.add(product['slug'])
+                else:
+                    # Generar un slug si no existe
+                    slug = generate_slug(product['name'], existing_slugs)
+                    product['slug'] = slug
+                    existing_slugs.add(slug)
+        except json.JSONDecodeError:
+            print(f"Advertencia: No se pudo decodificar el archivo JSON existente '{json_path}'. Se sobrescribirá.")
+            existing_products = []
+            existing_slugs = set()
+
+# Crear una lista para almacenar los nuevos productos
+new_products = []
 
 # Leer el archivo CSV
-with open('products.csv', 'r', encoding='utf-8') as csvfile:
+csv_path = 'products.csv'
+if not os.path.exists(csv_path):
+    raise FileNotFoundError(f"El archivo CSV '{csv_path}' no se encuentra en el directorio actual.")
+
+with open(csv_path, 'r', encoding='utf-8') as csvfile:
     reader = csv.DictReader(csvfile)
     for row in reader:
         product_name = row['name']
         price = row['price']
         main_image = row['main_image']
         secondary_image = row['secondary_image']
+
+        # Evitar productos con nombres duplicados (ignorando mayúsculas/minúsculas)
+        if any(product['name'].lower() == product_name.lower() for product in existing_products):
+            print(f"Advertencia: El producto '{product_name}' ya existe. Se omitirá.")
+            continue
+
+        # Generar el slug a partir del nombre del producto
+        slug = generate_slug(product_name, existing_slugs)
+        existing_slugs.add(slug)  # Añadir el slug al conjunto de slugs existentes
 
         # Preparar el prompt para ChatGPT
         selected_keywords = random.sample(KEYWORDS_LIST, min(len(KEYWORDS_LIST), 5))
@@ -141,7 +179,7 @@ with open('products.csv', 'r', encoding='utf-8') as csvfile:
                 stop=None,
             )
         except openai.error.OpenAIError as e:
-            print(f"Error al generar contenido para {product_name}: {e}")
+            print(f"Error al generar contenido para '{product_name}': {e}")
             continue
 
         # Obtener el contenido generado
@@ -153,87 +191,42 @@ with open('products.csv', 'r', encoding='utf-8') as csvfile:
         html_end = generated_content.rfind('>') + 1
         html_content = generated_content[html_start:html_end] if html_start != -1 and html_end != -1 else ''
 
-        # Usar BeautifulSoup para procesar el HTML y asignar clases
+        # Usar BeautifulSoup para procesar el HTML y extraer contenido
         soup = BeautifulSoup(html_content, 'html.parser')
 
-        # Remover todas las clases existentes asignadas por el modelo
-        for tag in soup.find_all():
-            if 'class' in tag.attrs:
-                del tag['class']
+        # Extraer subtítulo H2
+        h2_tag = soup.find('h2')
+        subtitle = h2_tag.get_text(strip=True) if h2_tag else ''
 
-        # Asignar clases específicas a cada tipo de elemento
-        for tag_name, class_list in ELEMENT_CLASSES.items():
-            # Para 'ul' y 'ol', asignar clases y luego asignar la misma clase a sus 'li' hijos
-            if tag_name in ['ul', 'ol']:
-                for tag in soup.find_all(tag_name):
-                    # Asignar una clase aleatoria al 'ul' o 'ol'
-                    random_class = random.choice(class_list)
-                    tag['class'] = [random_class]
+        # Extraer descripción
+        p_tag = soup.find('p')
+        description = p_tag.get_text(strip=True) if p_tag else ''
 
-                    # Seleccionar la clase para los 'li' dentro de esta lista
-                    li_class_list = ELEMENT_CLASSES['li']
-                    # Asignar una clase aleatoria para los 'li' de esta lista
-                    random_li_class = random.choice(li_class_list)
+        # Extraer lista de características
+        ul_tag = soup.find(['ul', 'ol'])
+        features = [li.get_text(strip=True) for li in ul_tag.find_all('li')] if ul_tag else []
 
-                    # Asignar la misma clase a todos los 'li' hijos de este 'ul' o 'ol'
-                    for li in tag.find_all('li', recursive=False):
-                        li['class'] = [random_li_class]
-            elif tag_name == 'li':
-                # Ya hemos asignado clases a los 'li' dentro de 'ul' o 'ol', así que omitimos este paso
-                continue
-            else:
-                for tag in soup.find_all(tag_name):
-                    # Asignar una clase aleatoria del conjunto correspondiente
-                    random_class = random.choice(class_list)
-                    tag['class'] = [random_class]
-
-        # Generar el nombre de archivo basado en el nombre del producto
-        filename_base = generate_filename_from_name(product_name)
-        filename = f'{filename_base}.html'
-
-        # Asegurar que el nombre de archivo sea único
-        counter = 1
-        while os.path.exists(os.path.join(output_dir, filename)):
-            filename = f'{filename_base}_{counter}.html'
-            counter += 1
-
-        # Generar la meta descripción
-        meta_description = f"{product_name} - {WEBSITE_CONTEXT}"
-
-        # Definir el contenido completo
-        # Crear el título H1 con clase asignada
-        h1_class = random.choice(ELEMENT_CLASSES['h1'])
-        h1_tag_html = f'<h1 class="{h1_class}">{product_name}</h1>'
-
-        # Crear las imágenes con clases asignadas
-        img_main_class = random.choice(ELEMENT_CLASSES['img'])
-        img_main_html = f'<img class="{img_main_class}" src="{main_image}" alt="{product_name} imagen principal">'
-
-        img_secondary_class = random.choice(ELEMENT_CLASSES['img'])
-        img_secondary_html = f'<img class="{img_secondary_class}" src="{secondary_image}" alt="{product_name} imagen secundaria">'
-
-        # Construir el contenido completo
-        full_content = f"""
-        {h1_tag_html}
-        {img_main_html}
-        {str(soup)}
-        {img_secondary_html}
-        """
-
-        # Definir variables adicionales para la plantilla
-        template_vars = {
-            'title': product_name,
-            'meta_description': meta_description,
-            'meta_keywords': keywords_str,
-            'meta_robots': robots_content,
-            'body_content': full_content,
+        # Agregar el producto a la lista
+        product = {
+            "name": product_name,
+            "slug": slug,
+            "price": price,
+            "main_image": main_image,
+            "secondary_image": secondary_image,
+            "subtitle": subtitle,
+            "description": description,
+            "features": features
         }
 
-        # Renderizar la plantilla
-        html_output = template.render(**template_vars)
+        new_products.append(product)
 
-        # Guardar el contenido generado en un nuevo archivo HTML
-        with open(os.path.join(output_dir, filename), 'w', encoding='utf-8') as f:
-            f.write(html_output)
+        print(f'Contenido generado para "{product_name}" con slug "{slug}".')
 
-        print(f'Archivo {filename} creado exitosamente en la carpeta "{output_dir}/".')
+# Combinar productos existentes con los nuevos
+combined_products = existing_products + new_products
+
+# Guardar los productos en un archivo JSON
+with open(json_path, 'w', encoding='utf-8') as jsonfile:
+    json.dump(combined_products, jsonfile, ensure_ascii=False, indent=4)
+
+print(f'Todos los productos han sido generados y guardados en {json_path}')
