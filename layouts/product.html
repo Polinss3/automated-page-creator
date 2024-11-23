@@ -1,0 +1,18 @@
+<!-- layouts/product.html -->
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ title }}</title>
+    <meta name="description" content="{{ meta_description }}">
+    <meta name="keywords" content="{{ meta_keywords }}">
+    <meta name="robots" content="{{ meta_robots }}">
+    <link rel="stylesheet" href="../../styles.css">
+</head>
+<body>
+    <div class="product">
+        {{ body_content | safe }}
+    </div>
+</body>
+</html>
