@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": [],
+  "sections": [
+    {"offset": {"line": 7, "column": 0}, "map": {"version":3,"sources":["file://C%3A/Users/pablo/automated-page-creation/frontend/src/app/products/%5Bslug%5D/layout.tsx"],"sourcesContent":["// frontend/app/products/layout.tsx\r\n\r\nimport './products.css';\r\nimport { ReactNode } from 'react';\r\n\r\ninterface ProductsLayoutProps {\r\n  children: ReactNode;\r\n}\r\n\r\nexport const metadata = {\r\n  title: 'Productos - Mi Tienda',\r\n  description: 'Explora nuestra amplia gama de productos de alta calidad.',\r\n  keywords: 'productos, tienda en línea, comprar, características, ofertas',\r\n  robots: 'index, follow',\r\n};\r\n\r\nconst ProductsLayout: React.FC<ProductsLayoutProps> = ({ children }) => {\r\n  return (\r\n    <div className=\"product-layout\">\r\n      {children}\r\n    </div>\r\n  );\r\n};\r\n\r\nexport default ProductsLayout;\r\n"],"names":[],"mappings":"AAAA,mCAAmC;;;;;;;;AAS5B,MAAM,WAAW;IACtB,OAAO;IACP,aAAa;IACb,UAAU;IACV,QAAQ;AACV;AAEA,MAAM,iBAAgD,CAAC,EAAE,QAAQ,EAAE;IACjE,qBACE,8OAAC;QAAI,WAAU;kBACZ;;;;;;AAGP;uCAEe"}},
+    {"offset": {"line": 32, "column": 0}, "map": {"version":3,"sources":[],"names":[],"mappings":"A"}}]
+}

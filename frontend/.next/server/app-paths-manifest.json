@@ -1,0 +1,10 @@
+{
+  "/posts/explorando_temas_interes_1/page": "app/posts/explorando_temas_interes_1/page.js",
+  "/posts/[slug]/page": "app/posts/[slug]/page.js",
+  "/favicon.ico/route": "app/favicon.ico/route.js",
+  "/posts/explorando_temas_interes_2/page": "app/posts/explorando_temas_interes_2/page.js",
+  "/posts/explorando_temas_actualidad/page": "app/posts/explorando_temas_actualidad/page.js",
+  "/posts/explorando_diversidad_temas_1/page": "app/posts/explorando_diversidad_temas_1/page.js",
+  "/posts/explorando_diversidad_temas_2/page": "app/posts/explorando_diversidad_temas_2/page.js",
+  "/posts/novedades_tendencias_articulos/page": "app/posts/novedades_tendencias_articulos/page.js"
+}

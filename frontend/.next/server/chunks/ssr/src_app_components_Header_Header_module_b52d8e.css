@@ -1,0 +1,298 @@
+/* [project]/src/app/components/Header/Header.module.css [app-client] (css) */
+.Header-module__gbg3bW__cabeceraPadre {
+  display: grid;
+  grid-template-columns: 50% 45%;
+  column-gap: 4%;
+  height: auto;
+  margin-left: 5vw;
+  width: 90vw;
+  margin-top: 100px;
+  margin-bottom: 20vh;
+}
+
+.Header-module__gbg3bW__imagenCabeceraPadre {
+  display: flex;
+  justify-content: flex-end;
+  align-content: center;
+  align-items: center;
+  background-size: cover;
+  background-position: center;
+}
+
+.Header-module__gbg3bW__imagenCabeceraPadre img {
+  width: 90%;
+  aspect-ratio: 400 / 250;
+  border-radius: 20px;
+}
+
+.Header-module__gbg3bW__textosCabeceraPadre {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 20px;
+}
+
+.Header-module__gbg3bW__textosCabeceraPadre h1 {
+  font-size: 75px;
+  font-weight: 700;
+  text-align: left;
+}
+
+.Header-module__gbg3bW__textosCabeceraPadre h2 {
+  font-size: 27px;
+  font-weight: 700;
+  margin: 0;
+}
+
+.Header-module__gbg3bW__textosCabeceraPadre h2:before {
+  display: none;
+}
+
+.Header-module__gbg3bW__gridCabeceraPadre {
+  display: grid;
+  grid-template-columns: 48% 48%;
+  grid-template-rows: 1fr 1fr 1fr;
+  column-gap: 4%;
+  row-gap: 25px;
+  width: 100%;
+}
+
+.Header-module__gbg3bW__textoGridCabeceraPadre {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+  gap: 10px;
+}
+
+.Header-module__gbg3bW__textoGridCabeceraPadre img {
+  height: 80px;
+}
+
+.Header-module__gbg3bW__configuracionCabeceraPadre {
+  width: 100%;
+  height: 60px;
+  display: grid;
+}
+
+.Header-module__gbg3bW__configuracionCabeceraPadre a {
+  width: 80%;
+  color: #fff;
+  background-color: var(--color1);
+  border-radius: 9px;
+  padding: 15px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  align-content: center;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.2rem;
+  margin-top: 15px;
+  font-family: var(--tipo3);
+  border: 0;
+}
+
+.Header-module__gbg3bW__configuracionCabeceraPadre a .Header-module__gbg3bW__svg-flechita {
+  fill: var(--neutral1);
+}
+
+.Header-module__gbg3bW__configuracionCabeceraPadre a:hover {
+  color: var(--color1);
+  background-color: var(--neutral1);
+  border: 1px solid var(--color1);
+}
+
+.Header-module__gbg3bW__configuracionCabeceraPadre a:hover .Header-module__gbg3bW__svg-flechita {
+  fill: var(--color1);
+}
+
+.Header-module__gbg3bW__precios-renting .Header-module__gbg3bW__configuracionCabeceraPadre button {
+  width: 80%;
+  color: var(--neutral1);
+  background-color: var(--color1);
+  border-radius: 9px;
+  padding: 15px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  align-content: center;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.2rem;
+  margin-top: 15px;
+  font-family: var(--tipo3);
+  border: 0;
+}
+
+.Header-module__gbg3bW__precios-renting .Header-module__gbg3bW__configuracionCabeceraPadre button .Header-module__gbg3bW__svg-flechita {
+  fill: var(--neutral1);
+}
+
+.Header-module__gbg3bW__precios-renting .Header-module__gbg3bW__configuracionCabeceraPadre button:hover {
+  color: var(--color1);
+  background-color: var(--neutral1);
+}
+
+.Header-module__gbg3bW__precios-renting .Header-module__gbg3bW__configuracionCabeceraPadre button:hover .Header-module__gbg3bW__svg-flechita {
+  fill: var(--color1);
+}
+
+.Header-module__gbg3bW__precios-compra .Header-module__gbg3bW__configuracionCabeceraPadre a {
+  width: 80%;
+  color: var(--color1);
+  background-color: var(--neutral1);
+  border-radius: 9px;
+  padding: 15px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  align-content: center;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.2rem;
+  margin-top: 15px;
+  font-family: var(--tipo3);
+  border: 0;
+}
+
+.Header-module__gbg3bW__precios-compra .Header-module__gbg3bW__configuracionCabeceraPadre a .Header-module__gbg3bW__svg-flechita {
+  fill: var(--color1);
+}
+
+.Header-module__gbg3bW__precios-compra .Header-module__gbg3bW__configuracionCabeceraPadre a:hover {
+  color: var(--neutral1);
+  background-color: var(--color1);
+  cursor: pointer;
+}
+
+.Header-module__gbg3bW__precios-compra .Header-module__gbg3bW__configuracionCabeceraPadre a:hover .Header-module__gbg3bW__svg-flechita {
+  fill: var(--neutral1);
+}
+
+.Header-module__gbg3bW__precios-compra .Header-module__gbg3bW__configuracionCabeceraPadre button {
+  width: 80%;
+  color: var(--color1);
+  background-color: var(--neutral1);
+  border-radius: 9px;
+  padding: 15px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  align-content: center;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.2rem;
+  margin-top: 15px;
+  font-family: var(--tipo3);
+  border: 0;
+}
+
+.Header-module__gbg3bW__precios-compra .Header-module__gbg3bW__configuracionCabeceraPadre button .Header-module__gbg3bW__svg-flechita {
+  fill: var(--color1);
+}
+
+.Header-module__gbg3bW__precios-compra .Header-module__gbg3bW__configuracionCabeceraPadre button:hover {
+  color: var(--neutral1);
+  background-color: var(--color1);
+  cursor: pointer;
+}
+
+.Header-module__gbg3bW__precios-compra .Header-module__gbg3bW__configuracionCabeceraPadre button:hover .Header-module__gbg3bW__svg-flechita {
+  fill: var(--neutral1);
+}
+
+.Header-module__gbg3bW__precios-renting .Header-module__gbg3bW__configuracionCabeceraPadre a, .Header-module__gbg3bW__precios-compra .Header-module__gbg3bW__configuracionCabeceraPadre a, .Header-module__gbg3bW__precios-renting .Header-module__gbg3bW__configuracionCabeceraPadre button, .Header-module__gbg3bW__precios-compra .Header-module__gbg3bW__configuracionCabeceraPadre button {
+  width: 50%;
+}
+
+.Header-module__gbg3bW__configuracionCabeceraPadre a svg, .Header-module__gbg3bW__configuracionCabeceraPadre button svg {
+  margin-left: 15px;
+}
+
+@media screen and (width <= 1200px) {
+  .Header-module__gbg3bW__cabeceraPadre {
+    display: flex;
+    flex-direction: column;
+    margin-top: 50px;
+    margin-bottom: 12vh;
+  }
+
+  .Header-module__gbg3bW__imagenCabeceraPadre {
+    width: 100%;
+    height: auto;
+    justify-content: center;
+  }
+
+  .Header-module__gbg3bW__imagenCabeceraPadre img {
+    padding: 25px;
+  }
+
+  .Header-module__gbg3bW__textosCabeceraPadre {
+    display: flex;
+  }
+
+  .Header-module__gbg3bW__textosCabeceraPadre h1 {
+    font-size: 50px;
+  }
+
+  .Header-module__gbg3bW__gridCabeceraPadre {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    width: 100%;
+  }
+
+  .Header-module__gbg3bW__textoGridCabeceraPadre:nth-child(odd) {
+    background-color: #0000;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-content: center;
+    justify-content: flex-start;
+    align-items: center;
+  }
+
+  .Header-module__gbg3bW__textoGridCabeceraPadre:nth-child(2n) {
+    background-color: #ececec;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-content: center;
+    justify-content: flex-start;
+    align-items: center;
+  }
+
+  .Header-module__gbg3bW__configuracionCabeceraPadre a {
+    width: 100%;
+    font-size: 1rem;
+  }
+
+  .Header-module__gbg3bW__precios_compra .Header-module__gbg3bW__configuracionCabeceraPadre button {
+    width: 80%;
+    color: var(--color1);
+    background-color: var(--neutral1);
+    border-radius: 9px;
+    padding: 15px;
+    margin: 0 auto;
+    display: none;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-content: center;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.2rem;
+    margin-top: 15px;
+    font-family: var(--tipo3);
+    border: 0;
+  }
+}
+
+/*# sourceMappingURL=src_app_components_Header_Header_module_b52d8e.css.map*/

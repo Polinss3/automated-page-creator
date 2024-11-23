@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": [],
+  "sections": [
+    {"offset": {"line": 1, "column": 0}, "map": {"version":3,"sources":["turbopack://[project]/src/app/components/PostDetails/PostDetails.module.css"],"sourcesContent":[".postContent {\r\n  padding: 2rem;\r\n  max-width: 800px;\r\n  margin: 0 auto;\r\n}\r\n\r\n.postContent h1 {\r\n  font-size: 2.5rem;\r\n  margin-bottom: 1rem;\r\n}\r\n\r\n.postContent h2 {\r\n  font-size: 2rem;\r\n  margin-top: 1.5rem;\r\n  margin-bottom: 1rem;\r\n}\r\n\r\n.postContent p {\r\n  font-size: 1.2rem;\r\n  line-height: 1.6;\r\n}\r\n\r\n.postContent ul, .postContent ol {\r\n  margin-left: 1.5rem;\r\n}\r\n\r\n.postContent table {\r\n  width: 100%;\r\n  border-collapse: collapse;\r\n  margin-top: 1rem;\r\n}\r\n\r\n.postContent th, .postContent td {\r\n  border: 1px solid #ddd;\r\n  padding: 0.5rem;\r\n}\r\n\r\n.postContent img {\r\n  max-width: 100%;\r\n  height: auto;\r\n  margin: 1rem 0;\r\n}\r\n"],"names":[],"mappings":"AAAA;;;;;;AAMA;;;;;AAKA;;;;;;AAMA;;;;;AAKA;;;;AAIA;;;;;;AAMA;;;;;AAKA"}},
+    {"offset": {"line": 43, "column": 0}, "map": {"version":3,"sources":[],"names":[],"mappings":"A"}}]
+}

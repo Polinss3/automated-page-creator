@@ -1,0 +1,45 @@
+/* [project]/src/app/components/PostDetails/PostDetails.module.css [app-client] (css) */
+.PostDetails-module__lqJ3aG__postContent {
+  padding: 2rem;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.PostDetails-module__lqJ3aG__postContent h1 {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+}
+
+.PostDetails-module__lqJ3aG__postContent h2 {
+  font-size: 2rem;
+  margin-top: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+.PostDetails-module__lqJ3aG__postContent p {
+  font-size: 1.2rem;
+  line-height: 1.6;
+}
+
+.PostDetails-module__lqJ3aG__postContent ul, .PostDetails-module__lqJ3aG__postContent ol {
+  margin-left: 1.5rem;
+}
+
+.PostDetails-module__lqJ3aG__postContent table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 1rem;
+}
+
+.PostDetails-module__lqJ3aG__postContent th, .PostDetails-module__lqJ3aG__postContent td {
+  border: 1px solid #ddd;
+  padding: .5rem;
+}
+
+.PostDetails-module__lqJ3aG__postContent img {
+  max-width: 100%;
+  height: auto;
+  margin: 1rem 0;
+}
+
+/*# sourceMappingURL=src_app_components_PostDetails_PostDetails_module_b52d8e.css.map*/

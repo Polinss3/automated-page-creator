@@ -1,0 +1,40 @@
+/* [project]/src/app/products/[slug]/products.css [app-client] (css) */
+.product-layout {
+  padding: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+  background-color: #f9f9f9;
+}
+
+.product-layout h1 {
+  font-size: 2.5rem;
+  margin-bottom: 10px;
+}
+
+.product-layout h2 {
+  font-size: 2rem;
+  margin-top: 20px;
+}
+
+.product-layout p {
+  font-size: 1.2rem;
+  line-height: 1.6;
+}
+
+.product-layout img {
+  width: 100%;
+  height: auto;
+  margin: 20px 0;
+}
+
+.product-layout ul {
+  list-style-type: disc;
+  padding-left: 20px;
+}
+
+.product-layout li {
+  margin-bottom: 5px;
+}
+
+
+/*# sourceMappingURL=src_app_products_%5Bslug%5D_products_e51d8c.css.map*/

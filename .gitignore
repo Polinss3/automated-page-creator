@@ -162,3 +162,5 @@ cython_debug/
 #.idea/
 
 config.py
+
+node_modules/

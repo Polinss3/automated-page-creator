@@ -1,0 +1,35 @@
+{
+  "app": {
+    "[project]/src/app/posts/explorando_temas_interes_1/page": [
+      "static/media/GeistVF-s.p.7fe29570.woff",
+      "static/media/GeistMonoVF-s.p.a9159d35.woff"
+    ],
+    "[project]/src/app/posts/[slug]/page": [
+      "static/media/GeistVF-s.p.7fe29570.woff",
+      "static/media/GeistMonoVF-s.p.a9159d35.woff"
+    ],
+    "[project]/src/app/posts/explorando_temas_interes_2/page": [
+      "static/media/GeistVF-s.p.7fe29570.woff",
+      "static/media/GeistMonoVF-s.p.a9159d35.woff"
+    ],
+    "[project]/src/app/posts/explorando_temas_actualidad/page": [
+      "static/media/GeistVF-s.p.7fe29570.woff",
+      "static/media/GeistMonoVF-s.p.a9159d35.woff"
+    ],
+    "[project]/src/app/posts/explorando_diversidad_temas_1/page": [
+      "static/media/GeistVF-s.p.7fe29570.woff",
+      "static/media/GeistMonoVF-s.p.a9159d35.woff"
+    ],
+    "[project]/src/app/posts/explorando_diversidad_temas_2/page": [
+      "static/media/GeistVF-s.p.7fe29570.woff",
+      "static/media/GeistMonoVF-s.p.a9159d35.woff"
+    ],
+    "[project]/src/app/posts/novedades_tendencias_articulos/page": [
+      "static/media/GeistVF-s.p.7fe29570.woff",
+      "static/media/GeistMonoVF-s.p.a9159d35.woff"
+    ]
+  },
+  "appUsingSizeAdjust": true,
+  "pages": {},
+  "pagesUsingSizeAdjust": false
+}
