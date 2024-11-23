@@ -9,11 +9,14 @@ import string
 from jinja2 import Environment, BaseLoader
 from bs4 import BeautifulSoup
 
+from config import (
+    API_KEY,
+    MODEL_NAME,
+    OUTPUT_DIRECTORY_POSTS,
+    ALLOW_SEARCH_ENGINES,
+)
+
 # Configuración
-API_KEY = ""
-MODEL_NAME = 'gpt-4o-mini'  # Modelo solicitado
-OUTPUT_DIRECTORY = 'frontend/src/app/posts'
-ALLOW_SEARCH_ENGINES = True
 
 # Contexto y palabras clave
 WEBSITE_CONTEXT = """
@@ -116,11 +119,11 @@ env = Environment(loader=BaseLoader())
 template = env.from_string(POST_TEMPLATE)
 
 # Crear directorio de posts si no existe
-os.makedirs(OUTPUT_DIRECTORY, exist_ok=True)
+os.makedirs(OUTPUT_DIRECTORY_POSTS, exist_ok=True)
 
 # Leer títulos existentes
 existing_titles = []
-for root, dirs, files in os.walk(OUTPUT_DIRECTORY):
+for root, dirs, files in os.walk(OUTPUT_DIRECTORY_POSTS):
     for file in files:
         if file.endswith('.tsx'):
             filepath = os.path.join(root, file)
@@ -219,12 +222,12 @@ slug = generate_slug(title)
 # Verificar si el slug ya existe y ajustar si es necesario
 original_slug = slug
 counter = 1
-while os.path.exists(os.path.join(OUTPUT_DIRECTORY, slug)):
+while os.path.exists(os.path.join(OUTPUT_DIRECTORY_POSTS, slug)):
     slug = f"{original_slug}_{counter}"
     counter += 1
 
 # Crear carpeta del post
-post_dir = os.path.join(OUTPUT_DIRECTORY, slug)
+post_dir = os.path.join(OUTPUT_DIRECTORY_POSTS, slug)
 os.makedirs(post_dir, exist_ok=True)
 
 # Renderizar plantilla
@@ -241,4 +244,4 @@ page_path = os.path.join(post_dir, 'page.tsx')
 with open(page_path, 'w', encoding='utf-8') as f:
     f.write(tsx_content)
 
-print(f'Archivo {slug}/page.tsx creado exitosamente en "{OUTPUT_DIRECTORY}/".')
+print(f'Archivo {slug}/page.tsx creado exitosamente en "{OUTPUT_DIRECTORY_POSTS}/".')
