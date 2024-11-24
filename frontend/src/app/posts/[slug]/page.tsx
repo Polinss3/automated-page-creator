@@ -1,75 +1,59 @@
-import fs from 'fs';
-import path from 'path';
-import matter from 'gray-matter';
-import { Post } from '@/../../types';
-import Header from '@/components/Header/Header';
-import PostDetails from '@/components/PostDetails/PostDetails';
-import { notFound } from 'next/navigation';
+// frontend/src/app/posts/[slug]/page.tsx
 
-interface PostPageProps {
-  params: {
-    slug: string;
-  };
+import React from 'react';
+import Header from '../../components/Header/Header';
+import PostDetails from '../../components/PostDetails/PostDetails';
+import Head from 'next/head';
+
+interface PostProps {
+  title: string;
+  meta_description: string;
+  meta_keywords: string;
+  meta_robots: string;
+  body_content: string;
 }
 
-export default async function PostPage({ params }: PostPageProps) {
+const PostPage = async ({ params }: { params: { slug: string } }) => {
   const { slug } = params;
-  const filePath = path.join(process.cwd(), 'src', 'posts', `${slug}.md`);
 
-  if (!fs.existsSync(filePath)) {
-    notFound();
+  // Realizar la solicitud al back-end de FastAPI
+  const res = await fetch(`http://localhost:8000/posts/${slug}/`, {
+    // Opcional: Puedes configurar la caché según tus necesidades
+    cache: 'no-store',
+  });
+
+  if (!res.ok) {
+    // Manejar errores de la solicitud
+    return (
+      <div>
+        <h1>Post no encontrado</h1>
+        <p>El post con el slug "{slug}" no existe.</p>
+      </div>
+    );
   }
 
-  const fileContents = fs.readFileSync(filePath, 'utf-8');
-  const { data, content } = matter(fileContents);
+  const post: PostProps = await res.json();
 
-  const post: Post = {
-    title: data.title,
-    description: data.description,
-    keywords: data.keywords,
-    content,
-  };
+  // Extraer características (caracteristicas) del contenido
+  const caracteristicas = post.body_content.match(/<li>.*?<\/li>/g)?.map(li => li.replace(/<\/?li>/g, '')) || [];
 
   return (
     <>
+      <Head>
+        <title>{post.title}</title>
+        <meta name="description" content={post.meta_description} />
+        <meta name="keywords" content={post.meta_keywords} />
+        <meta name="robots" content={post.meta_robots} />
+      </Head>
       <Header
-        introduccion={post.description}
-        caracteristicas={post.content.split('\n').filter(line => line.startsWith('- '))}
-        globalFotos={[]} // Añade URLs de imágenes si es necesario
+        introduccion={post.meta_description}
+        caracteristicas={caracteristicas}
+        globalFotos={[] /* Añade URLs de imágenes si es necesario */}
         marcaPadre={post.title}
       />
-      <PostDetails content={post.content} />
+      <PostDetails content={post.body_content} />
     </>
   );
-}
+};
 
-export async function generateStaticParams() {
-  const postsDirectory = path.join(process.cwd(), 'src', 'posts');
-  const filenames = fs.readdirSync(postsDirectory);
-
-  return filenames.map(filename => ({
-    slug: filename.replace(/\.md$/, ''),
-  }));
-}
-
-export async function generateMetadata({ params }: PostPageProps) {
-  const { slug } = params;
-  const filePath = path.join(process.cwd(), 'src', 'posts', `${slug}.md`);
-
-  if (!fs.existsSync(filePath)) {
-    return {
-      title: 'Post no encontrado',
-      description: 'El post que estás buscando no existe.',
-    };
-  }
-
-  const fileContents = fs.readFileSync(filePath, 'utf-8');
-  const { data } = matter(fileContents);
-
-  return {
-    title: data.title,
-    description: data.description,
-    keywords: data.keywords,
-    robots: 'index, follow',
-  };
-}
+export default PostPage;

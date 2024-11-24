@@ -1,16 +1,17 @@
 
+
 import React from 'react';
 import Header from '../../components/Header/Header';
 import PostDetails from '../../components/PostDetails/PostDetails';
 import Head from 'next/head';
 
 const PostPage: React.FC = () => {
-  const title = "Descubriendo lo actual: un vistazo a los temas de interés y noticias más recientes";
-  const meta_description = "Descubriendo lo actual: un vistazo a los temas de interés y noticias más recientes - Este sitio web es sobre artículos y noticias relacionadas con diversos temas de interés.";
-  const meta_keywords = "temas de interés, noticias, actualidad, artículos, información";
-  const meta_robots = "index, follow";
+  const title = "{{ title }}";
+  const meta_description = "{{ meta_description }}";
+  const meta_keywords = "{{ meta_keywords }}";
+  const meta_robots = "{{ meta_robots }}";
   const body_content = `{{ body_content }}`;
-  
+
   const caracteristicas = body_content.match(/<li>.*?<\/li>/g)?.map(li => li.replace(/<\/?li>/g, '')) || [];
 
   return (

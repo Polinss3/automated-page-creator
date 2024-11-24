@@ -1,7 +1,7 @@
-'use client';
+// frontend/src/App.js
 
 import React from 'react';
-import { generateNewPost } from '../utils/generatePost';
+import { generateNewPost } from './utils/generatePost';
 
 function App() {
   const handleGeneratePost = () => {
